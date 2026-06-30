@@ -32,3 +32,49 @@ The cart is fully session-based and works without authentication, database, or e
 - Font Awesome Icons
 
 ## 📂 Project Structure
+TechStore/
+│
+├── index.php
+├── products.php
+├── cartaction.php
+│
+├── assets/
+│ ├── style.css
+│ └── script.js
+│
+└── README.md
+
+
+## ⚙️ How To Run
+
+1. Install XAMPP / Laragon
+
+2. Move project folder into:
+
+htdocs or www
+
+3. Start Apache Server
+
+4. Open browser:
+
+http://localhost/TechStore
+
+## 🛒 Cart System Flow
+
+- User clicks **Add To Cart**
+- Request sends to PHP using AJAX
+- PHP updates session cart
+- Updated cart data returns as JSON
+- UI updates instantly
+
+## 📌 Project Limitations
+
+- No database
+- No user authentication
+- Static product data
+- Demo checkout system
+
+## 👨‍💻 Author
+
+Nisar Ahmed
+
