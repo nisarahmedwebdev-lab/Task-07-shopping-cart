@@ -33,15 +33,25 @@ The cart is fully session-based and works without authentication, database, or e
 
 ## 📂 Project Structure
 TechStore/
+<br>
 │
+<br>
 ├── index.php
+<br>
 ├── products.php
+<br>
 ├── cartaction.php
+<br>
 │
+<br>
 ├── assets/
+<br>
 │ ├── style.css
+<br>
 │ └── script.js
+<br>
 │
+<br>
 └── README.md
 
 
