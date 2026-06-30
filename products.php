@@ -50,12 +50,7 @@ $products = [
         "image" => "https://static.webx.pk/files/87161/Images/czone-20260428102530-87161-2462022-280426102549771.webp"
     ],
 
-    [
-        "id" => 9,
-        "name" => "led Monitor",
-        "price" => 10000,
-        "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHfamHTlBcjjYvdAqui80MEGHrCLwHrgkOgC70I1c9MmE5ER-XrKHYcnk&s=10"
-    ],
+    
 
     
 ];
