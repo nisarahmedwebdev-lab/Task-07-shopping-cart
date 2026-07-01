@@ -17,7 +17,7 @@ overlay.onclick = closeCart;
 
 
 
-function closeCart() {
+function closeCart(){
 
     panel.classList.remove("active");
     overlay.classList.remove("show");
@@ -26,92 +26,62 @@ function closeCart() {
 
 
 
-function addCart(id) {
+function addCart(id){
 
-    fetch("cartaction.php?action=add",
-        {
-            method: "POST",
-            body: new URLSearchParams({
-                id: id
-            })
-        })
+fetch("cartaction.php?action=add",
+{
+method:"POST",
+body:new URLSearchParams({
+id:id
+})
+})
 
-        .then(res => res.json())
+.then(res=>res.json())
 
-        .then(data => {
+.then(data=>{
 
-            updateCart(data);
+updateCart(data);
 
-            showMessage("Added to cart");
+showMessage("Added to cart");
 
-        });
-
-}
-
-
-
-
-function changeQty(id, qty) {
-
-    qty = Number(qty);
-
-
-    if (qty < 0) {
-        qty = 0;
-    }
-
-
-    fetch("cartaction.php?action=update",
-        {
-
-            method: "POST",
-
-            body: new URLSearchParams({
-
-                id: id,
-                qty: qty
-
-            })
-
-        })
-
-        .then(r => r.json())
-
-        .then(data => {
-
-            updateCart(data);
-
-        });
-
+});
 
 }
 
 
 
 
-function removeItem(id) {
+function changeQty(id,qty){
+
+qty = Number(qty);
 
 
-    fetch("cartaction.php?action=remove",
-        {
+if(qty < 0){
+    qty = 0;
+}
 
-            method: "POST",
 
-            body: new URLSearchParams({
+fetch("cartaction.php?action=update",
+{
 
-                id: id
+method:"POST",
 
-            })
+body:new URLSearchParams({
 
-        })
+id:id,
+qty:qty
 
-        .then(r => r.json())
+})
 
-        .then(data => {
+})
 
-            updateCart(data);
+.then(r=>r.json())
 
-        });
+.then(data=>{
+
+updateCart(data);
+
+});
 
 
 }
@@ -119,19 +89,49 @@ function removeItem(id) {
 
 
 
+function removeItem(id){
 
-function loadCart() {
+
+fetch("cartaction.php?action=remove",
+{
+
+method:"POST",
+
+body:new URLSearchParams({
+
+id:id
+
+})
+
+})
+
+.then(r=>r.json())
+
+.then(data=>{
+
+updateCart(data);
+
+});
 
 
-    fetch("cartaction.php?action=get")
+}
 
-        .then(r => r.json())
 
-        .then(data => {
 
-            updateCart(data);
 
-        })
+
+function loadCart(){
+
+
+fetch("cartaction.php?action=get")
+
+.then(r=>r.json())
+
+.then(data=>{
+
+updateCart(data);
+
+})
 
 
 }
@@ -143,29 +143,30 @@ loadCart();
 
 
 
-function updateCart(data) {
+function updateCart(data)
+{
 
-    if (!data)
-        return;
-
-
-
-    document.getElementById("badge").innerHTML = data.count || 0;
+if(!data)
+return;
 
 
 
-    let html = "";
+document.getElementById("badge").innerHTML = data.count || 0;
 
 
 
-    data.items.forEach(item => {
-
-
-        let qty = Number(item.qty);
+let html="";
 
 
 
-        html += `
+data.items.forEach(item=>{
+
+
+let qty = Number(item.qty);
+
+
+
+html+=`
 
 <div class="cart-item">
 
@@ -185,7 +186,7 @@ Rs ${item.price}
 
 
 
-<button onclick="changeQty(${item.id},${qty - 1})">
+<button onclick="changeQty(${item.id},${qty-1})">
 -
 </button>
 
@@ -195,7 +196,7 @@ Rs ${item.price}
 
 
 
-<button onclick="changeQty(${item.id},${qty + 1})">
+<button onclick="changeQty(${item.id},${qty+1})">
 +
 </button>
 
@@ -215,16 +216,16 @@ Remove
 
 
 
-    });
+});
 
 
 
-    document.getElementById("cartItems").innerHTML = html;
+document.getElementById("cartItems").innerHTML = html;
 
 
 
-    document.getElementById("total").innerHTML =
-        "Total: Rs " + (data.total || 0);
+document.getElementById("total").innerHTML =
+"Total: Rs " + (data.total || 0);
 
 
 
@@ -233,93 +234,24 @@ Remove
 
 
 
-function showMessage(text) {
+function showMessage(text)
+{
 
-    let msg = document.getElementById("msg");
-
-
-    msg.innerHTML = text;
+let msg=document.getElementById("msg");
 
 
-    msg.classList.add("show");
+msg.innerHTML=text;
+
+
+msg.classList.add("show");
 
 
 
-    setTimeout(() => {
+setTimeout(()=>{
 
-        msg.classList.remove("show")
+msg.classList.remove("show")
 
-    }, 1500);
+},1500);
 
 
 }
-
-let currentSlide = 0;
-
-const slides = document.querySelectorAll(".slide");
-
-const slider = document.querySelector(".slides");
-
-
-function showSlide() {
-
-    slider.style.transform =
-        `translateX(-${currentSlide * 100}%)`;
-
-}
-
-
-
-function nextSlide() {
-
-    currentSlide++;
-
-    if (currentSlide >= slides.length) {
-
-        currentSlide = 0;
-
-    }
-
-    showSlide();
-
-}
-
-
-
-function prevSlide() {
-
-    currentSlide--;
-
-    if (currentSlide < 0) {
-
-        currentSlide = slides.length - 1;
-
-    }
-
-    showSlide();
-
-}
-
-
-
-setInterval(nextSlide, 3000);
-
-document
-    .getElementById("checkoutBtn")
-    .onclick = function () {
-
-        let count = document.getElementById("badge").innerHTML;
-
-
-        if (count == 0) {
-
-            showMessage("Your cart is empty");
-
-            return;
-
-        }
-
-
-        alert("Checkout started successfully");
-
-    };
